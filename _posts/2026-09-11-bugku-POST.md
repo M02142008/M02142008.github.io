@@ -2,7 +2,7 @@
 ---
 layout: post
 title: "BugKu CTF Writeup-POST"
-date: 2026-09-10
+date: 2026-09-11
 categories: CTF
 tags: [BugKu, Web, 签到题]
 ---
