@@ -2,7 +2,7 @@
 ---
 layout: post
 title: "BugKu CTF Writeup-你以为是md5吗"
-date: 2026-09-10
+date: 2026-09-16
 categories: CTF
 tags: [BugKu, Web, 签到题]
 ---
