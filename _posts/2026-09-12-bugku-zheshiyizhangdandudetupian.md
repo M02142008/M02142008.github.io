@@ -2,7 +2,7 @@
 ---
 layout: post
 title: "BugKu CTF Writeup-这是一张单纯的图片"
-date: 2026-09-10
+date: 2026-09-12
 categories: CTF
 tags: [BugKu, Web, 签到题]
 ---
