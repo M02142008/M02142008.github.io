@@ -2,7 +2,7 @@
 ---
 layout: post
 title: "BugKu CTF Writeup-备份是个好习惯"
-date: 2026-09-10
+date: 2026-09-14
 categories: CTF
 tags: [BugKu, Web, 签到题]
 ---
