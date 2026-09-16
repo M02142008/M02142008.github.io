@@ -3,7 +3,7 @@
 ---
 layout: post
 title: "BugKu CTF Writeup-散乱的密文"
-date: 2026-09-10
+date: 2026-09-14
 categories: CTF
 tags: [BugKu, Web, 签到题]
 ---
