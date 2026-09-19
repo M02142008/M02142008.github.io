@@ -65,11 +65,11 @@ http://challenge-102968cfe1e356a7.sandbox.ctfhub.com:10800/.index.php.swp
 
 ## 笔记
 
-错误原因：
+#错误原因：
 
 CMD 里 curl 不行，因为`.swp`是二进制文件，Windows 黑框 cmd 不适合展示二进制内容；浏览器直接访问会**下载文件**，把内容存成本地文件，记事本打开看就正常。
 
-这道题主要学习了：
+#这道题主要学习了：
 
 1.swp：Vim 编辑器的**交换缓存文件（swap file）**
 
