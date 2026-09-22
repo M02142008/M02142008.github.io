@@ -1,0 +1,45 @@
+---
+---
+@import "minima";
+
+/* 全局页面底色改成纯黑，文字浅灰 */
+html, body {
+  background-color: #0a0a0a !important;
+  color: #c9d1d9 !important;
+}
+
+/* 头部、内容区域、底部全部变黑，消除白色块 */
+.site-header,
+.site-nav,
+.page-content,
+.post-list,
+footer,
+.wrapper {
+  background-color: #0a0a0a !important;
+  color: #c9d1d9 !important;
+}
+
+/* 标题颜色：干净冷白色 */
+h1, h2, h3 {
+  color: #e6edf3 !important;
+}
+
+/* 链接淡紫色，贴合紫薯公主的名字，不花哨 */
+a {
+  color: #b388ff !important;
+}
+a:hover {
+  color: #d4b8ff !important;
+}
+
+/* writeup里代码块，黑底绿字，CTF终端感 */
+pre.highlight,
+code {
+  background-color: #111 !important;
+  color: #a5ff9e !important;
+  border: 1px solid #222 !important;
+}
+
+* {
+  background-image: none !important;
+}
