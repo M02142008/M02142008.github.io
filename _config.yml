@@ -8,7 +8,7 @@ author:
   bio: 准大一｜Web安全入门，记录CTF刷题踩坑全过程
 
 header_pages:
-  - README.md
+  - index.md
 
 minima:
   skin: dark
