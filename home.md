@@ -2,6 +2,7 @@
 ---
 layout: home
 title: Writeup列表
+permalink: /home.html
 ---
 
 # 紫薯公主的Writeup
