@@ -2,7 +2,7 @@
 layout: home
 ---
 
-# 紫薯公主的安全实验室
+## MY BLOG
 > CTF Web 刷题仓库 | 漏洞复现 · Writeup 踩坑记录
 
 👋 你好，这里是我的网络安全学习笔记。
