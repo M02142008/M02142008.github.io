@@ -1,14 +1,29 @@
-title：MY BLOG
+titl: MY BLOG
 description: CTF Web学习笔记｜漏洞复现 & Writeup刷题记录
 theme: minima
 timezone: Asia/Shanghai
 
-# minima主题美化配置
 author:
   name: 紫薯
   bio: 准大一｜Web安全入门，记录CTF刷题踩坑全过程
 
-# 开启导航栏
 header_pages:
-  - index.md
-  - posts.md
+  - README.md
+
+minima:
+  skin: dark
+  social_links:
+    - { platform: github,  user_url: "https://github.com/M02142008" }
+
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+syntax_highlighter_opts:
+  css_class: 'highlight'
+
+paginate: 8
+paginate_path: "/page:num/"
+
+assets:
+  css:
+    - assets/css/custom.scss
