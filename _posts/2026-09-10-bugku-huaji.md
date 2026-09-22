@@ -3,7 +3,7 @@
 layout: post
 title: "BugKu CTF Writeup-滑稽"
 date: 2026-09-10
-categories: CTF
+categories: Bugku
 tags: [BugKu, Web, 签到题]
 ---
 
