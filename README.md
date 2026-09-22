@@ -1,3 +1,3 @@
 
-# 紫薯公主的安全实验室
+# MY BLOG
 CTF Web刷题Writeup仓库
