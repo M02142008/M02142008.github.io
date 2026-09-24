@@ -15,7 +15,8 @@
         .purple{color:#c49dff}
         .code-box{background:#171c32;padding:20px;border-radius:12px;margin:24px 0;font-family:monospace}
         .cmd{color:#73c2ff}
-        .grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin:40px 0}
+        /* 这里改成3列网格 */
+        .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:40px 0}
         .grid-item{background:#171c32;padding:24px;border-radius:14px;text-align:center;text-decoration:none;color:#e9edff;transition:0.2s}
         .grid-item:hover{background:#212847}
         .icon{font-size:32px;display:block;margin-bottom:8px}
@@ -47,12 +48,8 @@
             <em>这里是我的 CTF 作战室。</em></p >
         </div>
 
-        <!-- 4个按钮 -->
+        <!-- 只剩3个按钮：CTFHub Bugku 关于 -->
         <div class="grid">
-            <a href=" " class="grid-item">
-              <span class="icon">📘</span>
-              <span class="label">Writeup</span>
-            </a >
             <a href="/ctfhub.html" class="grid-item">
               <span class="icon">🌐</span>
               <span class="label">CTFHub</span>
