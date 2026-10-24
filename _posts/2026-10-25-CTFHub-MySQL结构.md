@@ -1,13 +1,13 @@
 
 ---
 layout: post
-title: "CTFHub Writeup-时间盲注"
+title: "CTFHub Writeup-MySQL结构"
 date: 2026-10-25
 categories: CTF
 tags: [CTFHub, Web, 技能树]
 ---
 
-# CTFHub Writeup - 时间盲注
+# CTFHub Writeup - MySQL结构
 
 ## 题目类型
 
