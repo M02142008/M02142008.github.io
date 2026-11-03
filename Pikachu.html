@@ -3,75 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>紫薯公主 CTF作战室</title>
+    <title>Pikachu | 紫薯公主 CTF作战室</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-        body{background:#0b0e1a;color:#e9edff;padding:30px;line-height:1.6}
-        .container{max-width:800px;margin:0 auto}
-        .header-info{display:flex;justify-content:space-between;opacity:0.7;margin-bottom:24px}
-        .hero{margin:40px 0}
-        h1{font-size:48px;font-weight:bold}
-        .blue{color:#73c2ff}
-        .purple{color:#c49dff}
-        .code-box{background:#171c32;padding:20px;border-radius:12px;margin:24px 0;font-family:monospace}
-        .cmd{color:#73c2ff}
-        /* ✅ 改成4列网格 */
-        .grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin:40px 0}
-        .grid-item{background:#171c32;padding:24px;border-radius:14px;text-align:center;text-decoration:none;color:#e9edff;transition:0.2s}
-        .grid-item:hover{background:#212847}
-        .icon{font-size:32px;display:block;margin-bottom:8px}
-        .section-title{font-size:22px;margin:40px 0 20px;color:#c49dff}
-        .post-item{background:#171c32;padding:20px;border-radius:12px;margin-bottom:12px;display:flex;justify-content:space-between}
-        .post-item a{color:#e9edff;text-decoration:none}
+        body{background:#121212;color:#eee;padding:20px;max-width:900px;margin:0 auto}
+        h1{color:#73ccff;margin-bottom:12px;border-bottom:1px solid #333;padding-bottom:10px;font-size:24px}
+        .desc{color:#aaa;margin-bottom:30px;font-size:15px}
+        .item{background:#1e1e1e;margin:12px 0;border-radius:8px;transition:0.2s}
+        .item a{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:16px;
+            color:#89cff0;
+            text-decoration:none;
+            font-size:17px;
+            width:100%;
+        }
+        .title{flex:1;min-width:0;overflow-wrap:anywhere}
+        .time{
+            color:#aaaaaa;
+            margin-left:16px;
+            font-size:15px;
+            white-space:nowrap;
+        }
+        .item:hover{background:#2c2c2c}
+        .back{margin-top:40px;display:inline-block}
+        .back a{color:#89cff0;text-decoration:none;font-size:17px;padding:8px 0;display:block}
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header-info">
-            <div>STATUS<br>CTF TRAINING</div>
-            <div>ROOM<br>WEB</div>
-            <div>LEVEL<br>BEGINNER</div>
-        </div>
+    <h1>🧩 Pikachu 漏洞练习平台</h1>
+    <p class="desc">Web漏洞入门练习 · XSS / SQL注入 / CSRF / SSRF / 文件包含 复现记录</p>
 
-        <div class="hero">
-            <h1><span class="blue">Ready for the</span><br><span class="purple">Cybersecurity World</span></h1>
-            <div class="hero-sub">I'm here. 紫薯公主 online.</div>
+<!-- ===== 模板：复制这一整块，改 href / 标题 / 日期 ===== -->
+<div class="item">
+    <a href="/2026/11/03/Pikachu-基于表单的暴力破解.html">
+        <span class="title">Pikachu - 基于表单的暴力破解</span>
+        <span class="time">2026-11-03</span>
+    </a >
+</div>
+<div class="item">
+    <a href="/2026/11/02/Pikachu-靶场搭建.html">
+        <span class="title">Pikachu - 靶场搭建</span>
+        <span class="time">2026-11-02</span>
+    </a >
+</div>
 
-            <div class="code-box">
-                <div><span class="cmd">$</span> whoami</div>
-                <div>zishu_princess</div>
-                <div><span class="cmd">$</span> cat mission.log</div>
-                <div>Web安全入门 · 漏洞复现 · Writeup记录</div>
-            </div>
-            <p>「以代码为盾，以逻辑为矛」<br>
-            从底层理解攻击，用笔记构建防御。<br>
-            <em>这里是我的 CTF 作战室。</em></p >
-        </div>
-
-        <!-- ✅ 4 列网格：🧩 Pikachu 已放在 🌐 CTFHub 前面 -->
-        <div class="grid">
-            <a href="pikachu.html" class="grid-item">
-              <span class="icon">🧩</span>
-              <span class="label">Pikachu</span>
-            </a >
-            <a href="ctfhub.html" class="grid-item">
-              <span class="icon">🌐</span>
-              <span class="label">CTFHub</span>
-            </a >
-            <a href="bugku.html" class="grid-item">
-              <span class="icon">🔧</span>
-              <span class="label">Bugku</span>
-            </a >
-            <a href="#about" class="grid-item">
-              <span class="icon">👑</span>
-              <span class="label">关于</span>
-            </a >
-        </div>
-
-        <div class="section-title" id="about">关于</div>
-        <div class="post-item">
-            <div>CTF Web刷题笔记仓库</div>
-        </div>
+    <div class="back">
+        <a href="index.html">← 返回首页</a >
     </div>
 </body>
 </html>
