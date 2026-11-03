@@ -15,8 +15,8 @@
         .purple{color:#c49dff}
         .code-box{background:#171c32;padding:20px;border-radius:12px;margin:24px 0;font-family:monospace}
         .cmd{color:#73c2ff}
-        /* 这里改成3列网格 */
-        .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:40px 0}
+        /* ✅ 改成4列网格 */
+        .grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin:40px 0}
         .grid-item{background:#171c32;padding:24px;border-radius:14px;text-align:center;text-decoration:none;color:#e9edff;transition:0.2s}
         .grid-item:hover{background:#212847}
         .icon{font-size:32px;display:block;margin-bottom:8px}
@@ -48,15 +48,19 @@
             <em>这里是我的 CTF 作战室。</em></p >
         </div>
 
-        <!-- 只剩3个按钮：CTFHub Bugku 关于 -->
+        <!-- ✅ 新增 Pikachu 拼图卡片，四格并排 -->
         <div class="grid">
-            <a href="/ctfhub.html" class="grid-item">
+            <a href=" " class="grid-item">
               <span class="icon">🌐</span>
               <span class="label">CTFHub</span>
             </a >
             <a href="/bugku.html" class="grid-item">
               <span class="icon">🔧</span>
               <span class="label">Bugku</span>
+            </a >
+            <a href="/pikachu.html" class="grid-item">
+              <span class="icon">🧩</span>
+              <span class="label">Pikachu</span>
             </a >
             <a href="#about" class="grid-item">
               <span class="icon">👑</span>
