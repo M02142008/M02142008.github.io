@@ -10,17 +10,21 @@
         h1{color:#73ccff;margin-bottom:30px;border-bottom:1px solid #333;padding-bottom:10px;font-size:24px}
         .item{background:#1e1e1e;margin:12px 0;border-radius:8px;transition:0.2s}
         .item a{
-            display:block;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
             padding:16px;
             color:#89cff0;
             text-decoration:none;
             font-size:17px;
             width:100%;
         }
+        .title{flex:1;min-width:0;overflow-wrap:anywhere}
         .time{
             color:#aaaaaa;
-            margin-right:14px;
+            margin-left:16px;
             font-size:15px;
+            white-space:nowrap;
         }
         .item:hover{background:#2c2c2c}
         .back{margin-top:40px;display:inline-block}
@@ -30,92 +34,180 @@
 <body>
     <h1>🔧 Bugku 刷题记录</h1>
 
+<!-- ===== 模板：复制这一整块，改 href / 标题 / 日期 ===== -->
 <div class="item">
-    <a href=" "><span class="time">2026-09-10</span>Bugku - 滑稽</a >
+    <a href="/2026/09/10/bugku-huaji.html">
+        <span class="title">Bugku - 滑稽</span>
+        <span class="time">2026-09-10</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/10/bugku-jisuanji.html"><span class="time">2026-09-10</span>Bugku - 计算机</a >
+    <a href="/2026/09/10/bugku-jisuanji.html">
+        <span class="title">Bugku - 计算机</span>
+        <span class="time">2026-09-10</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/10/bugku-nibixiangwantingxia.html"><span class="time">2026-09-10</span>Bugku - 你必须想办法听下</a >
+    <a href="/2026/09/10/bugku-nibixvrangtatingxia.html">
+        <span class="title">Bugku - 你必须想办法听下</span>
+        <span class="time">2026-09-10</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/10/first-post.html"><span class="time">2026-09-10</span>Bugku - first‑post</a >
+    <a href="/2026/09/10/first-post.html">
+        <span class="title">Bugku - first‑post</span>
+        <span class="time">2026-09-10</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/11/bugku-GET.html"><span class="time">2026-09-11</span>Bugku - GET</a >
+    <a href="/2026/09/11/bugku-GET.html">
+        <span class="title">Bugku - GET</span>
+        <span class="time">2026-09-11</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/11/bugku-POST.html"><span class="time">2026-09-11</span>Bugku - POST</a >
+    <a href="/2026/09/11/bugku-POST.html">
+        <span class="title">Bugku - POST</span>
+        <span class="time">2026-09-11</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/11/bugku-alert.html"><span class="time">2026-09-11</span>Bugku - alert</a >
+    <a href="/2026/09/11/bugku-alert.html">
+        <span class="title">Bugku - alert</span>
+        <span class="time">2026-09-11</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/11/bugku-source.html"><span class="time">2026-09-11</span>Bugku - source</a >
+    <a href="/2026/09/11/bugku-source.html">
+        <span class="title">Bugku - source</span>
+        <span class="time">2026-09-11</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/11/bugku-toudengcang.html"><span class="time">2026-09-11</span>Bugku - 头等舱</a >
+    <a href="/2026/09/11/bugku-toudengcang.html">
+        <span class="title">Bugku - 头等舱</span>
+        <span class="time">2026-09-11</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/12/bugku-%3C%3E.html"><span class="time">2026-09-12</span>Bugku - <></a >
+    <a href="https://github.com/M02142008/M02142008.github.io/blob/main/_posts/2026-09-12-bugku-%5C.-.md">
+        <span class="title">Bugku - /.-</span>
+        <span class="time">2026-09-12</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/12/bugku-ruishijundao.html"><span class="time">2026-09-12</span>Bugku - 瑞士军刀</a >
+    <a href="/2026/09/12/bugku-ruishijundao.html">
+        <span class="title">Bugku - 瑞士军刀</span>
+        <span class="time">2026-09-12</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/12/bugku-zheshiyizhangdandudet.html"><span class="time">2026-09-12</span>Bugku - 这是一张单独的图</a >
+    <a href="/2026/09/12/bugku-zheshiyizhangdandudetupian.html">
+        <span class="title">Bugku - 这是一张单独的图</span>
+        <span class="time">2026-09-12</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/13/bugku-%3C%2B%3E.html"><span class="time">2026-09-13</span>Bugku - <+></a >
+    <a href="https://github.com/M02142008/M02142008.github.io/blob/main/_posts/2026-09-13-bugku-%5B%2B-%3C%3E%5D.md">
+        <span class="title">Bugku - [+-&lt;&gt;]</span>
+        <span class="time">2026-09-13</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/13/bugku-congmingdexiaoyang.html"><span class="time">2026-09-13</span>Bugku - 聪明的小羊</a >
+    <a href="/2026/09/13/bugku-congmingdexiaoyang.html">
+        <span class="title">Bugku - 聪明的小羊</span>
+        <span class="time">2026-09-13</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/13/bugku-fuqiangminzhu.html"><span class="time">2026-09-13</span>Bugku - 富强民主</a >
+    <a href="/2026/09/13/bugku-fuqiangminzhu.html">
+        <span class="title">Bugku - 富强民主</span>
+        <span class="time">2026-09-13</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/13/bugku-linux.html"><span class="time">2026-09-13</span>Bugku - linux</a >
+    <a href="/2026/09/13/bugku-linux.html">
+        <span class="title">Bugku - linux</span>
+        <span class="time">2026-09-13</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/13/bugku-ok.html"><span class="time">2026-09-13</span>Bugku - ok</a >
+    <a href="/2026/09/13/bugku-ok.html">
+        <span class="title">Bugku - ok</span>
+        <span class="time">2026-09-13</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/14/bugku-12.html"><span class="time">2026-09-14</span>Bugku - 12</a >
+    <a href="https://github.com/M02142008/M02142008.github.io/blob/main/_posts/2026-09-14-bugku-.!%3F.md">
+        <span class="title">Bugku - .!?</span>
+        <span class="time">2026-09-14</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/14/bugku-bazhukunzaijuanli.html"><span class="time">2026-09-14</span>Bugku - 把猪困在圈里</a >
+    <a href="/2026/09/14/bugku-bazhukunzaizhujuanli.html">
+        <span class="title">Bugku - 把猪困在圈里</span>
+        <span class="time">2026-09-14</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/14/bugku-beifengshigaoxiguan.html"><span class="time">2026-09-14</span>Bugku - 备份是个好习惯</a >
+    <a href="/2026/09/14/bugku-beifenshigehaoxiguan.html">
+        <span class="title">Bugku - 备份是个好习惯</span>
+        <span class="time">2026-09-14</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/14/bugku-beisijiazu.html"><span class="time">2026-09-14</span>Bugku - 贝斯家族</a >
+    <a href="/2026/09/14/bugku-beisijiazu.html">
+        <span class="title">Bugku - 贝斯家族</span>
+        <span class="time">2026-09-14</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/14/bugku-maodun.html"><span class="time">2026-09-14</span>Bugku - 矛盾</a >
+    <a href="/2026/09/14/bugku-maodun.html">
+        <span class="title">Bugku - 矛盾</span>
+        <span class="time">2026-09-14</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/14/bugku-sanluandemimen.html"><span class="time">2026-09-14</span>Bugku - 散乱的密文</a >
+    <a href="/2026/09/14/bugku-sanluandemiwen.html">
+        <span class="title">Bugku - 散乱的密文</span>
+        <span class="time">2026-09-14</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/14/bugku-zhebusmid5.html"><span class="time">2026-09-14</span>Bugku - zhebusmid5</a >
+    <a href="/2026/09/14/bugku-zhebushimd5.html">
+        <span class="title">Bugku - zhebusmid5</span>
+        <span class="time">2026-09-14</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/15/bugku-chaocuodezif.html"><span class="time">2026-09-15</span>Bugku - 抄错的字符</a >
+    <a href="/2026/09/15/bugku-chaocuodezifu.html">
+        <span class="title">Bugku - 抄错的字符</span>
+        <span class="time">2026-09-15</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/15/bugku-huangdaoshierguan.html"><span class="time">2026-09-15</span>Bugku - 黄道十二关</a >
+    <a href="/2026/09/15/bugku-huangdaoshierguan.html">
+        <span class="title">Bugku - 黄道十二关</span>
+        <span class="time">2026-09-15</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/15/bugku-telnet.html"><span class="time">2026-09-15</span>Bugku - telnet</a >
+    <a href="/2026/09/15/bugku-telnet.html">
+        <span class="title">Bugku - telnet</span>
+        <span class="time">2026-09-15</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/15/bugku-yanjianfeishi.html"><span class="time">2026-09-15</span>Bugku - 眼见非实</a >
+    <a href="/2026/09/15/bugku-yanjianfeishi.html">
+        <span class="title">Bugku - 眼见非实</span>
+        <span class="time">2026-09-15</span>
+    </a >
 </div>
 <div class="item">
-    <a href="https://m02142008.github.io/2026/09/15/bugku-yinxie.html"><span class="time">2026-09-15</span>Bugku - 隐写</a >
+    <a href="/2026/09/15/bugku-yinxie.html">
+        <span class="title">Bugku - 隐写</span>
+        <span class="time">2026-09-15</span>
+    </a >
 </div>
 
     <div class="back">
