@@ -1,217 +1,61 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bugku 刷题记录</title>
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-        body{background:#121212;color:#eee;padding:20px;max-width:900px;margin:0 auto}
-        h1{color:#73ccff;margin-bottom:30px;border-bottom:1px solid #333;padding-bottom:10px;font-size:24px}
-        .item{background:#1e1e1e;margin:12px 0;border-radius:8px;transition:0.2s}
-        .item a{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:16px;
-            color:#89cff0;
-            text-decoration:none;
-            font-size:17px;
-            width:100%;
-        }
-        .title{flex:1;min-width:0;overflow-wrap:anywhere}
-        .time{
-            color:#aaaaaa;
-            margin-left:16px;
-            font-size:15px;
-            white-space:nowrap;
-        }
-        .item:hover{background:#2c2c2c}
-        .back{margin-top:40px;display:inline-block}
-        .back a{color:#89cff0;text-decoration:none;font-size:17px;padding:8px 0;display:block}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bugku 刷题记录</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#121212;color:#eee;padding:20px;max-width:900px;margin:0 auto}
+h1{color:#73ccff;margin-bottom:12px;border-bottom:1px solid #333;padding-bottom:10px;font-size:24px}
+.desc{color:#aaa;margin-bottom:30px;font-size:15px}
+.item{background:#1e1e1e;margin:12px 0;border-radius:8px;transition:.2s}
+.item a{display:flex;justify-content:space-between;align-items:center;padding:16px;color:#89cff0;text-decoration:none;font-size:17px;width:100%}
+.title{flex:1;min-width:0;overflow-wrap:anywhere}
+.time{color:#aaa;margin-left:16px;font-size:15px;white-space:nowrap}
+.item:hover{background:#2c2c2c}
+.back{margin-top:40px;display:inline-block}
+.back a{color:#89cff0;text-decoration:none;font-size:17px;padding:8px 0;display:block}
+</style>
 </head>
 <body>
-    <h1>🔧 Bugku 刷题记录</h1>
+<h1>🔧 Bugku 刷题记录</h1>
 
-<!-- ===== 模板：复制这一整块，改 href / 标题 / 日期 ===== -->
-<div class="item">
-    <a href="/2026/09/10/bugku-huaji.html">
-        <span class="title">Bugku - 滑稽</span>
-        <span class="time">2026-09-10</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/10/bugku-jisuanji.html">
-        <span class="title">Bugku - 计算机</span>
-        <span class="time">2026-09-10</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/10/bugku-nibixvrangtatingxia.html">
-        <span class="title">Bugku - 你必须想办法听下</span>
-        <span class="time">2026-09-10</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/10/first-post.html">
-        <span class="title">Bugku - first‑post</span>
-        <span class="time">2026-09-10</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/11/bugku-GET.html">
-        <span class="title">Bugku - GET</span>
-        <span class="time">2026-09-11</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/11/bugku-POST.html">
-        <span class="title">Bugku - POST</span>
-        <span class="time">2026-09-11</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/11/bugku-alert.html">
-        <span class="title">Bugku - alert</span>
-        <span class="time">2026-09-11</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/11/bugku-source.html">
-        <span class="title">Bugku - source</span>
-        <span class="time">2026-09-11</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/11/bugku-toudengcang.html">
-        <span class="title">Bugku - 头等舱</span>
-        <span class="time">2026-09-11</span>
-    </a >
-</div>
-<div class="item">
-    <a href="https://github.com/M02142008/M02142008.github.io/blob/main/_posts/2026-09-12-bugku-%5C.-.md">
-        <span class="title">Bugku - /.-</span>
-        <span class="time">2026-09-12</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/12/bugku-ruishijundao.html">
-        <span class="title">Bugku - 瑞士军刀</span>
-        <span class="time">2026-09-12</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/12/bugku-zheshiyizhangdandudetupian.html">
-        <span class="title">Bugku - 这是一张单独的图</span>
-        <span class="time">2026-09-12</span>
-    </a >
-</div>
-<div class="item">
-    <a href="https://github.com/M02142008/M02142008.github.io/blob/main/_posts/2026-09-13-bugku-%5B%2B-%3C%3E%5D.md">
-        <span class="title">Bugku - [+-&lt;&gt;]</span>
-        <span class="time">2026-09-13</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/13/bugku-congmingdexiaoyang.html">
-        <span class="title">Bugku - 聪明的小羊</span>
-        <span class="time">2026-09-13</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/13/bugku-fuqiangminzhu.html">
-        <span class="title">Bugku - 富强民主</span>
-        <span class="time">2026-09-13</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/13/bugku-linux.html">
-        <span class="title">Bugku - linux</span>
-        <span class="time">2026-09-13</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/13/bugku-ok.html">
-        <span class="title">Bugku - ok</span>
-        <span class="time">2026-09-13</span>
-    </a >
-</div>
-<div class="item">
-    <a href="https://github.com/M02142008/M02142008.github.io/blob/main/_posts/2026-09-14-bugku-.!%3F.md">
-        <span class="title">Bugku - .!?</span>
-        <span class="time">2026-09-14</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/14/bugku-bazhukunzaizhujuanli.html">
-        <span class="title">Bugku - 把猪困在圈里</span>
-        <span class="time">2026-09-14</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/14/bugku-beifenshigehaoxiguan.html">
-        <span class="title">Bugku - 备份是个好习惯</span>
-        <span class="time">2026-09-14</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/14/bugku-beisijiazu.html">
-        <span class="title">Bugku - 贝斯家族</span>
-        <span class="time">2026-09-14</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/14/bugku-maodun.html">
-        <span class="title">Bugku - 矛盾</span>
-        <span class="time">2026-09-14</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/14/bugku-sanluandemiwen.html">
-        <span class="title">Bugku - 散乱的密文</span>
-        <span class="time">2026-09-14</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/14/bugku-zhebushimd5.html">
-        <span class="title">Bugku - zhebusmid5</span>
-        <span class="time">2026-09-14</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/15/bugku-chaocuodezifu.html">
-        <span class="title">Bugku - 抄错的字符</span>
-        <span class="time">2026-09-15</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/15/bugku-huangdaoshierguan.html">
-        <span class="title">Bugku - 黄道十二关</span>
-        <span class="time">2026-09-15</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/15/bugku-telnet.html">
-        <span class="title">Bugku - telnet</span>
-        <span class="time">2026-09-15</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/15/bugku-yanjianfeishi.html">
-        <span class="title">Bugku - 眼见非实</span>
-        <span class="time">2026-09-15</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/15/bugku-yinxie.html">
-        <span class="title">Bugku - 隐写</span>
-        <span class="time">2026-09-15</span>
-    </a >
-</div>
+<div class="item"><a href="_posts/2026-09-10-bugku-huaji.md"><span class="title">Bugku - 滑稽</span><span class="time">2026-09-10</span></a></div>
+<div class="item"><a href="_posts/2026-09-10-bugku-jisuanji.md"><span class="title">Bugku - 计算机</span><span class="time">2026-09-10</span></a></div>
+<div class="item"><a href="_posts/2026-09-10-bugku-nibixvrangtatingxia.md"><span class="title">Bugku - 你必须想办法听下</span><span class="time">2026-09-10</span></a></div>
+<div class="item"><a href="_posts/2026-09-10-first-post.md"><span class="title">Bugku - first‑post</span><span class="time">2026-09-10</span></a></div>
+<div class="item"><a href="_posts/2026-09-11-bugku-GET.md"><span class="title">Bugku - GET</span><span class="time">2026-09-11</span></a></div>
+<div class="item"><a href="_posts/2026-09-11-bugku-POST.md"><span class="title">Bugku - POST</span><span class="time">2026-09-11</span></a></div>
+<div class="item"><a href="_posts/2026-09-11-bugku-alert.md"><span class="title">Bugku - alert</span><span class="time">2026-09-11</span></a></div>
+<div class="item"><a href="_posts/2026-09-11-bugku-source.md"><span class="title">Bugku - source</span><span class="time">2026-09-11</span></a></div>
+<div class="item"><a href="_posts/2026-09-11-bugku-toudengcang.md"><span class="title">Bugku - 头等舱</span><span class="time">2026-09-11</span></a></div>
+<div class="item"><a href="https://github.com/M02142008/M02142008.github.io/blob/main/_posts/2026-09-12-bugku-%5C.-.md"><span class="title">Bugku - /.-</span><span class="time">2026-09-12</span></a></div>
+<div class="item"><a href="_posts/2026-09-12-bugku-ruishijundao.md"><span class="title">Bugku - 瑞士军刀</span><span class="time">2026-09-12</span></a></div>
+<div class="item"><a href="_posts/2026-09-12-bugku-zheshiyizhangdandudetupian.md"><span class="title">Bugku - 这是一张单独的图</span><span class="time">2026-09-12</span></a></div>
+<div class="item"><a href="_posts/2026-09-13-bugku-%5B+-%3C%3E%5D.md"><span class="title">Bugku - [+-&lt;&gt;]</span><span class="time">2026-09-13</span></a></div>
+<div class="item"><a href="_posts/2026-09-13-bugku-congmingdexiaoyang.md"><span class="title">Bugku - 聪明的小羊</span><span class="time">2026-09-13</span></a></div>
+<div class="item"><a href="_posts/2026-09-13-bugku-fuqiangminzhu.md"><span class="title">Bugku - 富强民主</span><span class="time">2026-09-13</span></a></div>
+<div class="item"><a href="_posts/2026-09-13-bugku-linux.md"><span class="title">Bugku - linux</span><span class="time">2026-09-13</span></a></div>
+<div class="item"><a href="_posts/2026-09-13-bugku-ok.md"><span class="title">Bugku - ok</span><span class="time">2026-09-13</span></a></div>
+<div class="item"><a href="_posts/2026-09-14-bugku-.!%3F.md"><span class="title">Bugku - .!?</span><span class="time">2026-09-14</span></a></div>
+<div class="item"><a href="_posts/2026-09-14-bugku-bazhukunzaizhujuanli.md"><span class="title">Bugku - 把猪困在圈里</span><span class="time">2026-09-14</span></a></div>
+<div class="item"><a href="_posts/2026-09-14-bugku-beifenshigehaoxiguan.md"><span class="title">Bugku - 备份是个好习惯</span><span class="time">2026-09-14</span></a></div>
+<div class="item"><a href="_posts/2026-09-14-bugku-beisijiazu.md"><span class="title">Bugku - 贝斯家族</span><span class="time">2026-09-14</span></a></div>
+<div class="item"><a href="_posts/2026-09-14-bugku-maodun.md"><span class="title">Bugku - 矛盾</span><span class="time">2026-09-14</span></a></div>
+<div class="item"><a href="_posts/2026-09-14-bugku-sanluandemiwen.md"><span class="title">Bugku - 散乱的密文</span><span class="time">2026-09-14</span></a></div>
+<div class="item"><a href="_posts/2026-09-14-bugku-zhebushimd5.md"><span class="title">Bugku - zhebusmid5</span><span class="time">2026-09-14</span></a></div>
+<div class="item"><a href="_posts/2026-09-15-bugku-chaocuodezifu.md"><span class="title">Bugku - 抄错的字符</span><span class="time">2026-09-15</span></a></div>
+<div class="item"><a href="_posts/2026-09-15-bugku-huangdaoshierguan.md"><span class="title">Bugku - 黄道十二关</span><span class="time">2026-09-15</span></a></div>
+<div class="item"><a href="_posts/2026-09-15-bugku-telnet.md"><span class="title">Bugku - telnet</span><span class="time">2026-09-15</span></a></div>
+<div class="item"><a href="_posts/2026-09-15-bugku-yanjianfeishi.md"><span class="title">Bugku - 眼见非实</span><span class="time">2026-09-15</span></a></div>
+<div class="item"><a href="_posts/2026-09-15-bugku-yinxie.md"><span class="title">Bugku - 隐写</span><span class="time">2026-09-15</span></a></div>
 
-    <div class="back">
-        <a href="index.html">← 返回首页</a >
-    </div>
+<div class="back"><a href="index.html">← 返回首页</a></div>
+<script>
+document.querySelectorAll('a[href^="_posts/"]').forEach(function(a){
+  a.href = 'post.html?f=' + encodeURIComponent(a.getAttribute('href'));
+});
+</script>
 </body>
 </html>
