@@ -1,343 +1,82 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTFHub 刷题记录</title>
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-        body{background:#121212;color:#eee;padding:20px;max-width:900px;margin:0 auto}
-        h1{color:#73ccff;margin-bottom:30px;border-bottom:1px solid #333;padding-bottom:10px;font-size:24px}
-        .item{background:#1e1e1e;margin:12px 0;border-radius:8px;transition:0.2s}
-        .item a{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:16px;
-            color:#89cff0;
-            text-decoration:none;
-            font-size:17px;
-            width:100%;
-        }
-        .title{flex:1;min-width:0;overflow-wrap:anywhere}
-        .time{
-            color:#aaaaaa;
-            margin-left:16px;
-            font-size:15px;
-            white-space:nowrap;
-        }
-        .item:hover{background:#2c2c2c}
-        .back{margin-top:40px;display:inline-block}
-        .back a{color:#89cff0;text-decoration:none;font-size:17px;padding:8px 0;display:block}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTFHub 刷题记录</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#121212;color:#eee;padding:20px;max-width:900px;margin:0 auto}
+h1{color:#73ccff;margin-bottom:12px;border-bottom:1px solid #333;padding-bottom:10px;font-size:24px}
+.desc{color:#aaa;margin-bottom:30px;font-size:15px}
+.item{background:#1e1e1e;margin:12px 0;border-radius:8px;transition:.2s}
+.item a{display:flex;justify-content:space-between;align-items:center;padding:16px;color:#89cff0;text-decoration:none;font-size:17px;width:100%}
+.title{flex:1;min-width:0;overflow-wrap:anywhere}
+.time{color:#aaa;margin-left:16px;font-size:15px;white-space:nowrap}
+.item:hover{background:#2c2c2c}
+.back{margin-top:40px;display:inline-block}
+.back a{color:#89cff0;text-decoration:none;font-size:17px;padding:8px 0;display:block}
+</style>
 </head>
 <body>
-    <h1>CTFHub 刷题记录</h1>
+<h1>CTFHub 刷题记录</h1>
 
-<!-- ===== 模板：复制这一整块，改 href / 标题 / 日期 ===== -->
-<div class="item">
-    <a href="/2026/09/16/CTFHub-Baby-PHP.html">
-        <span class="title">Baby PHP</span>
-        <span class="time">2026-09-16</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/17/CTFHub-302跳转.html">
-        <span class="title">302跳转</span>
-        <span class="time">2026-09-17</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/17/CTFHub-Cookie.html">
-        <span class="title">Cookie</span>
-        <span class="time">2026-09-17</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/17/CTFHub-请求方式.html">
-        <span class="title">请求方式</span>
-        <span class="time">2026-09-17</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/18/CTDHub-响应包源代码.html">
-        <span class="title">响应包源代码</span>
-        <span class="time">2026-09-18</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/18/CTFHub-PHPINFO.html">
-        <span class="title">PHPINFO</span>
-        <span class="time">2026-09-18</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/18/CTFHub-目录遍历.html">
-        <span class="title">目录遍历</span>
-        <span class="time">2026-09-18</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/18/CTFHub-网站源码.html">
-        <span class="title">网站源码</span>
-        <span class="time">2026-09-18</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/19/CTFHub-.DS_Store.html">
-        <span class="title">DS_Store</span>
-        <span class="time">2026-09-19</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/19/CTFHub-bak文件.html">
-        <span class="title">bak文件</span>
-        <span class="time">2026-09-19</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/19/CTFHub-vim缓存.html">
-        <span class="title">vim缓存</span>
-        <span class="time">2026-09-19</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/19/CTFHub-弱口令.html">
-        <span class="title">弱口令</span>
-        <span class="time">2026-09-19</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/21/CTFHub-无验证.html">
-        <span class="title">无验证</span>
-        <span class="time">2026-09-21</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/24/CTFHub-无过滤.html">
-        <span class="title">无过滤</span>
-        <span class="time">2026-09-24</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/27/CTFHub-HG泄露.html">
-        <span class="title">HG泄露</span>
-        <span class="time">2026-09-27</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/27/CTFHub-Index.html">
-        <span class="title">Index</span>
-        <span class="time">2026-09-27</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/27/CTFHub-Log.html">
-        <span class="title">Log</span>
-        <span class="time">2026-09-27</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/27/CTFHub-SVN泄露.html">
-        <span class="title">SVN泄露</span>
-        <span class="time">2026-09-27</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/27/CTFHub-Stash.html">
-        <span class="title">Stash</span>
-        <span class="time">2026-09-27</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/28/CTFHub-文件包含.html">
-        <span class="title">文件包含</span>
-        <span class="time">2026-09-28</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/28/CTFHub-默认口令.html">
-        <span class="title">默认口令</span>
-        <span class="time">2026-09-28</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/29/CTFHub-eval执行.html">
-        <span class="title">eval执行</span>
-        <span class="time">2026-09-29</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/29/CTFHub-php输入.html">
-        <span class="title">php输入</span>
-        <span class="time">2026-09-29</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/30/CTFHub-过滤cat.html">
-        <span class="title">过滤cat</span>
-        <span class="time">2026-09-30</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/09/30/CTFHub-过滤空格.html">
-        <span class="title">过滤空格</span>
-        <span class="time">2026-09-30</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/07/CTFHub-读取源代码.html">
-        <span class="title">读取源代码</span>
-        <span class="time">2026-10-07</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/07/CTFHub-远程包含.html">
-        <span class="title">远程包含</span>
-        <span class="time">2026-10-07</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/08/CTFHub-整数型注入.html">
-        <span class="title">整数型注入</span>
-        <span class="time">2026-10-08</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/09/CTFHub-字符型注入.html">
-        <span class="title">字符型注入</span>
-        <span class="time">2026-10-09</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/23/CTFHub-前端验证.html">
-        <span class="title">前端验证</span>
-        <span class="time">2026-10-23</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/23/CTFHub-基本认证.html">
-        <span class="title">基本认证</span>
-        <span class="time">2026-10-23</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/24/CTFHub-布尔盲注.html">
-        <span class="title">布尔盲注</span>
-        <span class="time">2026-10-24</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/24/CTFHub-报错注入.html">
-        <span class="title">报错注入</span>
-        <span class="time">2026-10-24</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/24/CTFHub-时间盲注.html">
-        <span class="title">时间盲注</span>
-        <span class="time">2026-10-24</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/25/CTFHub-Cookie注入.html">
-        <span class="title">Cookie注入</span>
-        <span class="time">2026-10-25</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/25/CTFHub-MySQL结构.html">
-        <span class="title">MySQL结构</span>
-        <span class="time">2026-10-25</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/25/CTFHub-Refer注入.html">
-        <span class="title">Refer注入</span>
-        <span class="time">2026-10-25</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/25/CTFHub-UA注入.html">
-        <span class="title">UA注入</span>
-        <span class="time">2026-10-25</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/25/CTFHub-综合训练-SQLI-LABS.html">
-        <span class="title">综合训练 SQLI-LABS</span>
-        <span class="time">2026-10-25</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/25/CTFHub-过滤空格.html">
-        <span class="title">过滤空格</span>
-        <span class="time">2026-10-25</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/26/CTFHub-00截断.html">
-        <span class="title">00截断</span>
-        <span class="time">2026-10-26</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/26/CTFHub-DOM反射.html">
-        <span class="title">DOM反射</span>
-        <span class="time">2026-10-26</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/26/CTFHub-DOM跳转.html">
-        <span class="title">DOM跳转</span>
-        <span class="time">2026-10-26</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/26/CTFHub-MIME绕过.html">
-        <span class="title">MIME绕过</span>
-        <span class="time">2026-10-26</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/26/CTFHub-双写后缀.html">
-        <span class="title">双写后缀</span>
-        <span class="time">2026-10-26</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/26/CTFHub-反射型.html">
-        <span class="title">反射型</span>
-        <span class="time">2026-10-26</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/26/CTFHub-存储型.html">
-        <span class="title">存储型</span>
-        <span class="time">2026-10-26</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/26/CTFHub-文件头检查.html">
-        <span class="title">文件头检查</span>
-        <span class="time">2026-10-26</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/26/CTFHub-过滤关键词.html">
-        <span class="title">过滤关键词</span>
-        <span class="time">2026-10-26</span>
-    </a >
-</div>
-<div class="item">
-    <a href="/2026/10/26/CTFHub-过滤空格(XSS).html">
-        <span class="title">过滤空格(XSS)</span>
-        <span class="time">2026-10-26</span>
-    </a >
-</div>
+<div class="item"><a href="_posts/2026-09-16-CTFHub-Baby%20PHP.md"><span class="title">Baby PHP</span><span class="time">2026-09-16</span></a></div>
+<div class="item"><a href="_posts/2026-09-17-CTFHub-302跳转.md"><span class="title">302跳转</span><span class="time">2026-09-17</span></a></div>
+<div class="item"><a href="_posts/2026-09-17-CTFHub-Cookie.md"><span class="title">Cookie</span><span class="time">2026-09-17</span></a></div>
+<div class="item"><a href="_posts/2026-09-17-CTFHub-请求方式.md"><span class="title">请求方式</span><span class="time">2026-09-17</span></a></div>
+<div class="item"><a href="_posts/2026-09-18-CTDHub-响应包源代码.md"><span class="title">响应包源代码</span><span class="time">2026-09-18</span></a></div>
+<div class="item"><a href="_posts/2026-09-18-CTFHub-PHPINFO.md"><span class="title">PHPINFO</span><span class="time">2026-09-18</span></a></div>
+<div class="item"><a href="_posts/2026-09-18-CTFHub-目录遍历.md"><span class="title">目录遍历</span><span class="time">2026-09-18</span></a></div>
+<div class="item"><a href="_posts/2026-09-18-CTFHub-网站源码.md"><span class="title">网站源码</span><span class="time">2026-09-18</span></a></div>
+<div class="item"><a href="_posts/2026-09-19-CTFHub-.DS_Store.md"><span class="title">DS_Store</span><span class="time">2026-09-19</span></a></div>
+<div class="item"><a href="_posts/2026-09-19-CTFHub-bak文件.md"><span class="title">bak文件</span><span class="time">2026-09-19</span></a></div>
+<div class="item"><a href="_posts/2026-09-19-CTFHub-vim缓存.md"><span class="title">vim缓存</span><span class="time">2026-09-19</span></a></div>
+<div class="item"><a href="_posts/2026-09-19-CTFHub-弱口令.md"><span class="title">弱口令</span><span class="time">2026-09-19</span></a></div>
+<div class="item"><a href="_posts/2026-09-21-CTFHub-无验证.md"><span class="title">无验证</span><span class="time">2026-09-21</span></a></div>
+<div class="item"><a href="_posts/2026-09-24-CTFHub-无过滤.md"><span class="title">无过滤</span><span class="time">2026-09-24</span></a></div>
+<div class="item"><a href="_posts/2026-09-27-CTFHub-HG泄露.md"><span class="title">HG泄露</span><span class="time">2026-09-27</span></a></div>
+<div class="item"><a href="_posts/2026-09-27-CTFHub-Index.md"><span class="title">Index</span><span class="time">2026-09-27</span></a></div>
+<div class="item"><a href="_posts/2026-09-27-CTFHub-Log.md"><span class="title">Log</span><span class="time">2026-09-27</span></a></div>
+<div class="item"><a href="_posts/2026-09-27-CTFHub-SVN泄露.md"><span class="title">SVN泄露</span><span class="time">2026-09-27</span></a></div>
+<div class="item"><a href="_posts/2026-09-27-CTFHub-Stash.md"><span class="title">Stash</span><span class="time">2026-09-27</span></a></div>
+<div class="item"><a href="_posts/2026-09-28-CTFHub-文件包含.md"><span class="title">文件包含</span><span class="time">2026-09-28</span></a></div>
+<div class="item"><a href="_posts/2026-09-28-CTFHub-默认口令.md"><span class="title">默认口令</span><span class="time">2026-09-28</span></a></div>
+<div class="item"><a href="_posts/2026-09-29-CTFHub-eval执行.md"><span class="title">eval执行</span><span class="time">2026-09-29</span></a></div>
+<div class="item"><a href="_posts/2026-09-29-CTFHub-php输入.md"><span class="title">php输入</span><span class="time">2026-09-29</span></a></div>
+<div class="item"><a href="_posts/2026-09-30-CTFHub-过滤cat.md"><span class="title">过滤cat</span><span class="time">2026-09-30</span></a></div>
+<div class="item"><a href="_posts/2026-09-30-CTFHub-过滤空格.md"><span class="title">过滤空格</span><span class="time">2026-09-30</span></a></div>
+<div class="item"><a href="_posts/2026-10-07-CTFHub-读取源代码.md"><span class="title">读取源代码</span><span class="time">2026-10-07</span></a></div>
+<div class="item"><a href="_posts/2026-10-07-CTFHub-远程包含.md"><span class="title">远程包含</span><span class="time">2026-10-07</span></a></div>
+<div class="item"><a href="_posts/2026-10-08-CTFHub-整数型注入.md"><span class="title">整数型注入</span><span class="time">2026-10-08</span></a></div>
+<div class="item"><a href="_posts/2026-10-09-CTFHub-字符型注入.md"><span class="title">字符型注入</span><span class="time">2026-10-09</span></a></div>
+<div class="item"><a href="_posts/2026-10-23-CTFHub-前端验证.md"><span class="title">前端验证</span><span class="time">2026-10-23</span></a></div>
+<div class="item"><a href="_posts/2026-10-23-CTFHub-基本认证.md"><span class="title">基本认证</span><span class="time">2026-10-23</span></a></div>
+<div class="item"><a href="_posts/2026-10-24-CTFHub-布尔盲注.md"><span class="title">布尔盲注</span><span class="time">2026-10-24</span></a></div>
+<div class="item"><a href="_posts/2026-10-24-CTFHub-报错注入.md"><span class="title">报错注入</span><span class="time">2026-10-24</span></a></div>
+<div class="item"><a href="_posts/2026-10-24-CTFHub-时间盲注.md"><span class="title">时间盲注</span><span class="time">2026-10-24</span></a></div>
+<div class="item"><a href="_posts/2026-10-25-CTFHub-Cookie注入.md"><span class="title">Cookie注入</span><span class="time">2026-10-25</span></a></div>
+<div class="item"><a href="_posts/2026-10-25-CTFHub-MySQL结构.md"><span class="title">MySQL结构</span><span class="time">2026-10-25</span></a></div>
+<div class="item"><a href="_posts/2026-10-25-CTFHub-Refer注入.md"><span class="title">Refer注入</span><span class="time">2026-10-25</span></a></div>
+<div class="item"><a href="_posts/2026-10-25-CTFHub-UA注入.md"><span class="title">UA注入</span><span class="time">2026-10-25</span></a></div>
+<div class="item"><a href="_posts/2026-10-25-CTFHub-综合训练%20SQLI-LABS.md"><span class="title">综合训练 SQLI-LABS</span><span class="time">2026-10-25</span></a></div>
+<div class="item"><a href="_posts/2026-10-25-CTFHub-过滤空格.md"><span class="title">过滤空格</span><span class="time">2026-10-25</span></a></div>
+<div class="item"><a href="_posts/2026-10-26-CTFHub-00截断.md"><span class="title">00截断</span><span class="time">2026-10-26</span></a></div>
+<div class="item"><a href="_posts/2026-10-26-CTFHub-DOM反射.md"><span class="title">DOM反射</span><span class="time">2026-10-26</span></a></div>
+<div class="item"><a href="_posts/2026-10-26-CTFHub-DOM跳转.md"><span class="title">DOM跳转</span><span class="time">2026-10-26</span></a></div>
+<div class="item"><a href="_posts/2026-10-26-CTFHub-MIME绕过.md"><span class="title">MIME绕过</span><span class="time">2026-10-26</span></a></div>
+<div class="item"><a href="_posts/2026-10-26-CTFHub-双写后缀.md"><span class="title">双写后缀</span><span class="time">2026-10-26</span></a></div>
+<div class="item"><a href="_posts/2026-10-26-CTFHub-反射型.md"><span class="title">反射型</span><span class="time">2026-10-26</span></a></div>
+<div class="item"><a href="_posts/2026-10-26-CTFHub-存储型.md"><span class="title">存储型</span><span class="time">2026-10-26</span></a></div>
+<div class="item"><a href="_posts/2026-10-26-CTFHub-文件头检查.md"><span class="title">文件头检查</span><span class="time">2026-10-26</span></a></div>
+<div class="item"><a href="_posts/2026-10-26-CTFHub-过滤关键词.md"><span class="title">过滤关键词</span><span class="time">2026-10-26</span></a></div>
+<div class="item"><a href="_posts/2026-10-26-CTFHub-过滤空格(XSS).md"><span class="title">过滤空格(XSS)</span><span class="time">2026-10-26</span></a></div>
 
-    <div class="back">
-        <a href="index.html">← 返回首页</a >
-    </div>
+<div class="back"><a href="index.html">← 返回首页</a></div>
+<script>
+document.querySelectorAll('a[href^="_posts/"]').forEach(function(a){
+  a.href = 'post.html?f=' + encodeURIComponent(a.getAttribute('href'));
+});
+</script>
 </body>
 </html>
