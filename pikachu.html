@@ -73,5 +73,10 @@ h1{color:#73ccff;margin-bottom:12px;border-bottom:1px solid #333;padding-bottom:
 <div class="item"><a href="_posts/2026-11-10-Pikachu-XSS后台.md.txt"><span class="title">Pikachu - XSS 后台</span><span class="time">2026-11-10</span></a></div>
 
 <div class="back"><a href="index.html">← 返回首页</a></div>
+<script>
+document.querySelectorAll('a[href^="_posts/"]').forEach(function(a){
+  a.href = 'post.html?f=' + encodeURIComponent(a.getAttribute('href'));
+});
+</script>
 </body>
 </html>
